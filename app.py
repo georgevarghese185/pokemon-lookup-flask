@@ -1,7 +1,9 @@
 from flask import Flask, render_template, jsonify, request
 from pokemon_api import findPokemon
+import os
 
-app = Flask(__name__)
+template_dir = os.path.abspath('./docs')
+app = Flask(__name__, template_folder=template_dir)
 
 @app.route('/')
 def index():
@@ -17,6 +19,3 @@ def get_pokemon():
         return jsonify(pokemon_data)
     else:
         return jsonify({'error': 'Please provide a Pokémon name in the query parameter'}), 400
-
-if __name__ == "__main__":
-    app.run(debug=True)
