@@ -35,4 +35,5 @@ def getPokemonSpecies(pokemon):
 def getSpeciesName(species, language):
     return next((name["name"] for name in species["names"] if name["language"]["name"] == language), None)
 
-print(findPokemon("ditto"))
+if __name__ == "__main__":
+    print(findPokemon("ditto"))
