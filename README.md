@@ -1,5 +1,7 @@
 # A Pokémon lookup demo app
 
+Try it out here: https://georgevarghese185.github.io/pokemon-lookup-flask
+
 Written in Python w/ Flask
 
 Created as part of the coursework for Python II at Lambton College, Mississauga
