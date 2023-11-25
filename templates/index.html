@@ -5,6 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokémon Lookup</title>
 
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      p {
+        text-align: center;
+        color: #666;
+      }
+
+      form {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      input {
+        padding: 10px;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+      }
+
+      #bio {
+        display: none;
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      span {
+        font-weight: bold;
+      }
+
+      #error {
+        display: none;
+        color: #d9534f;
+        text-align: center;
+        margin-top: 20px;
+      }
+    </style>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const form = document.querySelector("form");
