@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, Response
 from pokemon_api import findPokemon
 import os
 
@@ -15,7 +15,8 @@ def get_pokemon():
 
     if pokemon_name:
         pokemon_data = findPokemon(pokemon_name)
-
-        return jsonify(pokemon_data)
+        resp = jsonify(pokemon_data)
+        resp.headers["Access-Control-Allow-Origin"] = "https://georgevarghese185.github.io"
+        return resp
     else:
         return jsonify({'error': 'Please provide a Pokémon name in the query parameter'}), 400
