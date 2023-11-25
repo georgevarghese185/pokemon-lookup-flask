@@ -78,6 +78,11 @@
     </style>
 
     <script>
+      const baseUrl =
+        window.location.origin === "https://georgevarghese185.github.io"
+          ? "https://georgevm-pokemon-lookup.onrender.com" // This is a production copy. Use deployed prod server
+          : ""; // this is a local copy. Use the current localhost domain
+
       document.addEventListener("DOMContentLoaded", () => {
         const form = document.querySelector("form");
 
@@ -86,7 +91,9 @@
 
           const pokemonName = new FormData(form).get("pokemon");
 
-          const response = await fetch(`/pokemon?name=${pokemonName}`);
+          const response = await fetch(
+            `${baseUrl}/pokemon?name=${pokemonName}`
+          );
           const data = await response.json();
 
           if (data.error) {
