@@ -4,8 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokémon Lookup</title>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const pokemonName = new FormData(form).get("pokemon");
+
+          const response = await fetch(`/pokemon?name=${pokemonName}`);
+          const data = await response.json();
+
+          if (data.error) {
+            document.getElementById("error").style.display = "block";
+            document.getElementById("error").innerText = data.error;
+            document.getElementById("bio").style.display = "none";
+            return;
+          }
+
+          document.getElementById("error").style.display = "none";
+
+          document.getElementById("bio").style.display = "block";
+          document.getElementById("sprite").setAttribute("src", data.sprite);
+          document.getElementById("name-en").innerText =
+            data.species.names.english;
+          document.getElementById("name-jp").innerText =
+            data.species.names.japanese;
+          document.getElementById("generation").innerText =
+            data.species.generation;
+          document.getElementById("height").innerText = data.height;
+          document.getElementById("capture-rate").innerText =
+            data.species.capture_rate;
+        });
+      });
+    </script>
   </head>
   <body>
     <h1>Pokémon Lookup (Flask demo)</h1>
+
+    <p>Try searching for some Pokémons!</p>
+    <br />
+    <p>(Some examples you can try: pikachu, ditto, lucario, jigglypuff)</p>
+    <br />
+
+    <form>
+      <label for="pokemon-input"></label>
+      <input type="text" name="pokemon" id="pokemon-input" />
+      <button>Search</button>
+    </form>
+
+    <div id="bio" style="display: none">
+      <img id="sprite" />
+      <p>
+        Name: <span id="name-en">Name</span> (<span id="name-jp">Name</span>)
+      </p>
+      <p>Generation: <span id="generation"></span></p>
+      <p>Height: <span id="height">0</span></p>
+      <p>Capture Rate: <span id="capture-rate"></span></p>
+    </div>
+    <p style="display: none" id="error">Error Message</p>
   </body>
 </html>

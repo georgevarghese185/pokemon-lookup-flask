@@ -18,4 +18,4 @@ def get_pokemon():
     else:
         return jsonify({'error': 'Please provide a Pokémon name in the query parameter'}), 400
 
-app.run()
+# app.run(debug=True)
