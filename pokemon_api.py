@@ -1,4 +1,5 @@
 import requests
+import re
 
 def findPokemon(name):
     url = f"https://pokeapi.co/api/v2/pokemon/{name.lower()}"
@@ -24,8 +25,8 @@ def getPokemonSpecies(pokemon):
     species = requests.get(url).json()
 
     return {
-        "generation": species["generation"]["name"].replace("-", " ").title(),
-        "capture_rate": f'{species["capture_rate"]}%',
+        "generation": capitalize_generation(species["generation"]["name"].replace("-", " ")),
+        "capture_rate": f'{round(species["capture_rate"] / 255 * 100, 2)}%',
         "names": {
             "english": getSpeciesName(species, "en"),
             "japanese": getSpeciesName(species, "ja-Hrkt")
@@ -34,6 +35,15 @@ def getPokemonSpecies(pokemon):
 
 def getSpeciesName(species, language):
     return next((name["name"] for name in species["names"] if name["language"]["name"] == language), None)
+
+def capitalize_generation(s):
+    def capitalize_roman(match):
+        return match.group(0).upper()
+
+    s = s.capitalize()
+    s = re.sub(r'\b[ivxlcdm]+\b', capitalize_roman, s)
+
+    return s
 
 if __name__ == "__main__":
     print(findPokemon("ditto"))
