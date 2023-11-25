@@ -18,4 +18,5 @@ def get_pokemon():
     else:
         return jsonify({'error': 'Please provide a Pokémon name in the query parameter'}), 400
 
-# app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
